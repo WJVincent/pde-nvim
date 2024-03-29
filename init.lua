@@ -10,3 +10,4 @@ vim.wo.relativenumber = true
 
 require('lazy-setup')
 require('telescope-setup')
+require('options')

@@ -1,0 +1,11 @@
+vim.o.hlsearch = false                 -- dont highlight on search, its annoying
+vim.o.clipboard = 'unnamedplus'        -- use system clipboard
+vim.o.breakindent = true               -- on line wrap keep indent level
+vim.o.undofile = true                  -- allows persistent undo history
+vim.o.ignorecase =  true               -- ignore case when searching
+vim.o.smartcase = true                 -- if search contains uppercase, become case sensitive
+vim.wo.signcolumn = 'yes'              -- always show the sign column
+vim.o.completeopt = 'menuone,noselect' -- completion menu settings
+vim.o.termguicolors = true             -- enable true color (24 bit)
+vim.o.guicursor = 'n:hr25,i:ver25'     -- set cursor style in different modes
+vim.o.cursorline = true                -- highlight current line
