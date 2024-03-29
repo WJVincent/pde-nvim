@@ -9,3 +9,4 @@ vim.g.maplocalleader = ' '
 vim.wo.relativenumber = true
 
 require('lazy-setup')
+require('telescope-setup')
