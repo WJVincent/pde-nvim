@@ -26,6 +26,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
 				settings = {
@@ -36,14 +37,14 @@ return {
 					},
 				},
 			})
-			lspconfig.bashls.setup({})
-			lspconfig.clangd.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.html.setup({})
-			lspconfig.htmx.setup({})
-			lspconfig.jsonls.setup({})
-			lspconfig.tsserver.setup({})
-			lspconfig.marksman.setup({})
+			lspconfig.bashls.setup({ capabilities = capabilities})
+			lspconfig.clangd.setup({ capabilities = capabilities})
+			lspconfig.cssls.setup({ capabilities = capabilities})
+			lspconfig.html.setup({ capabilities = capabilities})
+			lspconfig.htmx.setup({ capabilities = capabilities})
+			lspconfig.jsonls.setup({ capabilities = capabilities})
+			lspconfig.tsserver.setup({ capabilities = capabilities})
+			lspconfig.marksman.setup({ capabilities = capabilities})
 		end,
 	},
 }
