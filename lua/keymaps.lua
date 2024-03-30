@@ -18,6 +18,7 @@ wk.register({
 })
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[<space>] find existing buffers' })
 vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", { desc = "file [e]xplorer" })
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "file [f]ind" })
 vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "file in [g]it" })
