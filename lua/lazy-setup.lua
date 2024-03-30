@@ -39,8 +39,8 @@ local lazy_plugins = {
   
   -- display pending keybinds
   { 
-    'folke/which-key.nvim',  
-    opts = {} 
+    'folke/which-key.nvim',
+    opts = {},
   },
 
   -- color theme
