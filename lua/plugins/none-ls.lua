@@ -9,7 +9,7 @@ return {
 			sources = {
 				require("none-ls.diagnostics.eslint_d").with({
 					condition = function(utils)
-						return utils.root_has_file(".eslintrc")
+						return utils.root_has_file(".eslint*")
 					end,
 				}),
 				null_ls.builtins.formatting.stylua,

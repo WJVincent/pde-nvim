@@ -13,4 +13,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- initialize plugins
+-- string arg to setup takes a module name
 require("lazy").setup("plugins")
