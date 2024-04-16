@@ -8,6 +8,14 @@ Command Mnemonics
 ]]
 --
 
+local function toggle_line_numbers()
+	if not vim.wo.relativenumber then
+		vim.wo.relativenumber = true
+	else
+		vim.wo.relativenumber = false
+	end
+end
+
 -- register command group labels
 local wk = require("which-key")
 wk.register({
@@ -17,7 +25,7 @@ wk.register({
 })
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[<space>] find existing buffers' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'find existing buffers' })
 vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", { desc = "file [e]xplorer" })
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "file [f]ind" })
 vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "file in [g]it" })
@@ -35,3 +43,5 @@ vim.keymap.set("n", "<leader>sf", function()
 		previewer = false,
 	}))
 end, { desc = "fuzzy search current [f]ile/buffer" })
+vim.keymap.set('n', '<leader>t', toggle_line_numbers, { desc = "[t]oggle rel line nums" })
+vim.keymap.set('n', '<leader>ww', "<cmd>lua require(\'kiwi\').open_wiki_index()<cr>")
