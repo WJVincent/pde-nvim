@@ -11,6 +11,7 @@ vim.wo.relativenumber = true
 -- imports
 require("lazy-setup")
 require("telescope-setup")
+require("harpoon-setup")
 require("options")
 require("keymaps")
 
