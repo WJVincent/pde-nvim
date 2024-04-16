@@ -17,3 +17,4 @@ vim.o.softtabstop = 4                  -- number of spaces to insert for tab cha
 vim.o.shiftwidth = 4                   -- width of indentation and '<' '>' commands
 vim.wo.number = true                   -- Make line numbers default
 vim.o.conceallevel = 2
+vim.o.autochdir = true
