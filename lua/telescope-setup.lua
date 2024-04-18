@@ -17,7 +17,6 @@ require("telescope").setup({
 
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
-pcall(require("telescope").load_extension, "file_browser")
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
