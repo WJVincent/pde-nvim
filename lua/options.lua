@@ -17,3 +17,7 @@ vim.o.softtabstop = 4                  -- number of spaces to insert for tab cha
 vim.o.shiftwidth = 4                   -- width of indentation and '<' '>' commands
 vim.wo.number = true                   -- Make line numbers default
 vim.o.conceallevel = 2
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 4
