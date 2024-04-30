@@ -16,7 +16,6 @@ vim.o.tabstop = 4                      -- display width of a tab char
 vim.o.softtabstop = 4                  -- number of spaces to insert for tab char
 vim.o.shiftwidth = 4                   -- width of indentation and '<' '>' commands
 vim.wo.number = true                   -- Make line numbers default
-vim.o.conceallevel = 2
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99

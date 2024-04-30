@@ -25,8 +25,8 @@ wk.register({
 })
 
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'find existing buffers' })
-vim.keymap.set("n", "<leader>fe", require('oil').toggle_float, { desc = "file [e]xplorer" })
+vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "find existing buffers" })
+vim.keymap.set("n", "<leader>fe", require("oil").toggle_float, { desc = "file [e]xplorer" })
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "file [f]ind" })
 vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "file in [g]it" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "search [h]elp" })
@@ -43,5 +43,5 @@ vim.keymap.set("n", "<leader>sf", function()
 		previewer = false,
 	}))
 end, { desc = "fuzzy search current [f]ile/buffer" })
-vim.keymap.set('n', '<leader>t', toggle_line_numbers, { desc = "[t]oggle rel line nums" })
-vim.keymap.set('n', '<leader>ww', "<cmd>lua require(\'kiwi\').open_wiki_index()<cr>")
+vim.keymap.set("n", "<leader>t", toggle_line_numbers, { desc = "[t]oggle rel line nums" })
+vim.keymap.set("n", "<leader>ww", "<cmd>lua require('kiwi').open_wiki_index()<cr>")
