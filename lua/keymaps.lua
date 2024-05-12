@@ -16,6 +16,48 @@ local function toggle_line_numbers()
 	end
 end
 
+local function attempt_to_compile()
+	local width = 50
+	local height = 10
+
+	local buf = vim.api.nvim_create_buf(false, true)
+	local ui = vim.api.nvim_list_uis()[1]
+
+	local opts = {
+		relative = "editor",
+		row = (ui.height / 2) - (height / 2),
+		col = (ui.width / 2) - (width / 2),
+		width = width,
+		height = height,
+		anchor = "NW",
+		style = "minimal",
+	}
+
+	os.execute('touch temp')
+	local handle = os.execute("ls -l >> temp")
+	if handle then
+		local res_split = {}
+
+		for line in io.lines('temp') do 
+			table.insert(res_split, line)
+		end
+
+		os.execute('rm temp')
+		for i,v in ipairs(res_split) do
+			if i == 1 then
+				vim.api.nvim_buf_set_lines(buf, 0, -1, false, {v})
+			else
+				vim.api.nvim_buf_set_lines(buf, -1, -1, false, {v})
+			end
+		end
+
+		vim.api.nvim_open_win(buf, 1, opts)
+	else
+		print("it didnt work")
+	end
+end
+
+vim.keymap.set("n", "<leader>cc", attempt_to_compile)
 -- register command group labels
 local wk = require("which-key")
 wk.register({
