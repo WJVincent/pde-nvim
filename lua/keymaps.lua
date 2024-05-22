@@ -17,8 +17,8 @@ local function toggle_line_numbers()
 end
 
 local function attempt_to_compile()
-	local width = 50
-	local height = 10
+	local width = 150
+	local height = 15
 
 	local buf = vim.api.nvim_create_buf(false, true)
 	local ui = vim.api.nvim_list_uis()[1]
@@ -33,28 +33,30 @@ local function attempt_to_compile()
 		style = "minimal",
 	}
 
-	os.execute('touch temp')
-	local handle = os.execute("ls -l >> temp")
-	if handle then
+	local handle = os.execute("ls | grep -c Makefile")
+
+	if handle == 0 then
+		os.execute("make >> tmp")
 		local res_split = {}
 
-		for line in io.lines('temp') do 
+		for line in io.lines("tmp") do
 			table.insert(res_split, line)
 		end
 
-		os.execute('rm temp')
-		for i,v in ipairs(res_split) do
+		os.remove("tmp")
+
+		for i, v in ipairs(res_split) do
 			if i == 1 then
-				vim.api.nvim_buf_set_lines(buf, 0, -1, false, {v})
+				vim.api.nvim_buf_set_lines(buf, 0, -1, false, { v })
 			else
-				vim.api.nvim_buf_set_lines(buf, -1, -1, false, {v})
+				vim.api.nvim_buf_set_lines(buf, -1, -1, false, { v })
 			end
 		end
-
-		vim.api.nvim_open_win(buf, 1, opts)
 	else
-		print("it didnt work")
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "there is not a makefile" })
 	end
+
+	vim.api.nvim_open_win(buf, true, opts)
 end
 
 vim.keymap.set("n", "<leader>cc", attempt_to_compile)

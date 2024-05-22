@@ -19,6 +19,7 @@ return {
 					"jsonls",
 					"tsserver",
 					"marksman",
+					"hls",
 				},
 			})
 		end,
@@ -45,6 +46,7 @@ return {
 			lspconfig.jsonls.setup({ capabilities = capabilities })
 			lspconfig.tsserver.setup({ capabilities = capabilities })
 			lspconfig.marksman.setup({ capabilities = capabilities })
+			lspconfig.hls.setup({ capabilities = capabilities })
 		end,
 	},
 }
