@@ -8,6 +8,18 @@ Command Mnemonics
 ]]
 --
 
+local function trim(s)
+	local l = 1
+	while string.sub(s, l, l) == " " do
+		l = l + 1
+	end
+	local r = string.len(s)
+	while string.sub(s, r, r) == " " do
+		r = r - 1
+	end
+	return string.sub(s, l, r)
+end
+
 local function toggle_line_numbers()
 	if not vim.wo.relativenumber then
 		vim.wo.relativenumber = true
@@ -22,7 +34,7 @@ local function run_make_file(buf, grep_check)
 		local res_split = {}
 
 		for line in io.lines("tmp") do
-			table.insert(res_split, line)
+			table.insert(res_split, trim(line))
 		end
 
 		os.remove("tmp")
@@ -40,32 +52,37 @@ local function run_make_file(buf, grep_check)
 end
 
 local function run_node_js(buf, curr_file_path)
-	local cmd = "node " .. curr_file_path .. " >> tmp"
-	os.execute(cmd)
+	local cmd = "node " .. curr_file_path .. " > tmp"
+	local out = os.execute(cmd)
+	print(out)
 	local res_split = {}
 
 	for line in io.lines("tmp") do
-		table.insert(res_split, line)
+		table.insert(res_split, trim(line))
 	end
 
-	os.remove("tmp")
-
-	for i, v in ipairs(res_split) do
-		if i == 1 then
-			vim.api.nvim_buf_set_lines(buf, 0, -1, false, { v })
-		else
-			vim.api.nvim_buf_set_lines(buf, -1, -1, false, { v })
+	os.execute("rm tmp")
+	if out == 0 then 
+		for i, v in ipairs(res_split) do
+			if i == 1 then
+				vim.api.nvim_buf_set_lines(buf, 0, -1, false, { v })
+			else
+				vim.api.nvim_buf_set_lines(buf, -1, -1, false, { v })
+			end
 		end
+	else
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "something went wrong, go run this in a terminal you lazy git" })
 	end
 end
 
 function string:endswith(suffix)
+---@diagnostic disable-next-line: param-type-mismatch
 	return self:sub(-#suffix) == suffix
 end
 
 local function attempt_to_compile()
-	local width = 150
-	local height = 15
+	local width = 100
+	local height = 10
 
 	local buf = vim.api.nvim_create_buf(false, true)
 	local ui = vim.api.nvim_list_uis()[1]
@@ -91,7 +108,7 @@ local function attempt_to_compile()
 	vim.api.nvim_open_win(buf, true, opts)
 end
 
-vim.keymap.set("n", "<leader>cc", attempt_to_compile)
+vim.keymap.set("n", "<leader>cc", attempt_to_compile, { desc = "attempt to [c]ompile/run" })
 -- register command group labels
 local wk = require("which-key")
 wk.register({
