@@ -62,7 +62,7 @@ local function run_node_js(buf, curr_file_path)
 	end
 
 	os.execute("rm tmp")
-	if out == 0 then 
+	if out == 0 then
 		for i, v in ipairs(res_split) do
 			if i == 1 then
 				vim.api.nvim_buf_set_lines(buf, 0, -1, false, { v })
@@ -71,12 +71,18 @@ local function run_node_js(buf, curr_file_path)
 			end
 		end
 	else
-		vim.api.nvim_buf_set_lines(buf, 0, -1, false, { "something went wrong, go run this in a terminal you lazy git" })
+		vim.api.nvim_buf_set_lines(
+			buf,
+			0,
+			-1,
+			false,
+			{ "something went wrong, go run this in a terminal you lazy git" }
+		)
 	end
 end
 
 function string:endswith(suffix)
----@diagnostic disable-next-line: param-type-mismatch
+	---@diagnostic disable-next-line: param-type-mismatch
 	return self:sub(-#suffix) == suffix
 end
 

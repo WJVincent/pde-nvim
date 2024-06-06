@@ -20,6 +20,7 @@ return {
 					"tsserver",
 					"marksman",
 					"hls",
+					"elixirls",
 				},
 			})
 		end,
@@ -47,6 +48,14 @@ return {
 			lspconfig.tsserver.setup({ capabilities = capabilities })
 			lspconfig.marksman.setup({ capabilities = capabilities })
 			lspconfig.hls.setup({ capabilities = capabilities })
+			lspconfig.elixirls.setup({
+				capabilities = capabilities,
+				cmd = { "/home/wvincent/.elixir-ls/release/language_server.sh" },
+				dialyzerEnabled = true,
+				fetchDeps = false,
+				enableTestLenses = false,
+				suggestSpecs = false,
+			})
 		end,
 	},
 }
