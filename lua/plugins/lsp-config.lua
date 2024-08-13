@@ -21,6 +21,9 @@ return {
 					"marksman",
 					"hls",
 					"elixirls",
+					"gopls",
+					"pyright",
+					"emmet_ls",
 				},
 			})
 		end,
@@ -48,6 +51,9 @@ return {
 			lspconfig.tsserver.setup({ capabilities = capabilities })
 			lspconfig.marksman.setup({ capabilities = capabilities })
 			lspconfig.hls.setup({ capabilities = capabilities })
+			lspconfig.gopls.setup({ capabilities = capabilities, single_file_support = true })
+			lspconfig.pyright.setup({ capabilities = capabilities })
+			lspconfig.emmet_ls.setup({ capabilities = capabilities })
 			lspconfig.elixirls.setup({
 				capabilities = capabilities,
 				cmd = { "/home/wvincent/.elixir-ls/release/language_server.sh" },

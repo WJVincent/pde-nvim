@@ -8,6 +8,8 @@ Command Mnemonics
 ]]
 --
 
+local set = vim.keymap.set
+
 local function trim(s)
 	local l = 1
 	while string.sub(s, l, l) == " " do
@@ -114,7 +116,6 @@ local function attempt_to_compile()
 	vim.api.nvim_open_win(buf, true, opts)
 end
 
-vim.keymap.set("n", "<leader>cc", attempt_to_compile, { desc = "attempt to [c]ompile/run" })
 -- register command group labels
 local wk = require("which-key")
 wk.register({
@@ -123,24 +124,39 @@ wk.register({
 	["<leader>c"] = { name = "+code" },
 })
 
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "find existing buffers" })
-vim.keymap.set("n", "<leader>fe", require("oil").toggle_float, { desc = "file [e]xplorer" })
-vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "file [f]ind" })
-vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "file in [g]it" })
-vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "search [h]elp" })
-vim.keymap.set("n", "<leader>sG", require("telescope.builtin").live_grep, { desc = "[G]rep search in dir" })
-vim.keymap.set("n", "<leader>sg", ":LiveGrepGitRoot<cr>", { desc = "[g]rep search git files or cwd" })
-vim.keymap.set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "view code [d]iagnostics" })
-vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "go to [definition]" })
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code [a]ction" })
-vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "code [f]ormat" })
-vim.keymap.set("n", "<leader>sf", function()
+-- misc
+set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "find existing buffers" })
+set("n", "K", vim.lsp.buf.hover, {})
+set("n", "gd", vim.lsp.buf.definition, { desc = "go to [d]efinition" })
+set("n", "<leader>t", toggle_line_numbers, { desc = "[t]oggle rel line nums" })
+set("n", "<leader>ww", "<cmd>lua require('kiwi').open_wiki_index()<cr>")
+
+-- [s]earch
+set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "search [h]elp" })
+set("n", "<leader>sG", require("telescope.builtin").live_grep, { desc = "[G]rep search in dir" })
+set("n", "<leader>sg", ":LiveGrepGitRoot<cr>", { desc = "[g]rep search git files or cwd" })
+set("n", "<leader>sf", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 		winblend = 10,
 		previewer = false,
 	}))
 end, { desc = "fuzzy search current [f]ile/buffer" })
-vim.keymap.set("n", "<leader>t", toggle_line_numbers, { desc = "[t]oggle rel line nums" })
-vim.keymap.set("n", "<leader>ww", "<cmd>lua require('kiwi').open_wiki_index()<cr>")
+
+-- [file]
+set("n", "<leader>fe", require("oil").toggle_float, { desc = "file [e]xplorer" })
+set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[f]ind all files" })
+set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "find file in [g]it" })
+
+-- [c]ode
+set("n", "<leader>cc", attempt_to_compile, { desc = "attempt to [c]ompile/run" })
+set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "code [r]ename" })
+set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "code [a]ction" })
+set("n", "<leader>cf", vim.lsp.buf.format, { desc = "code [f]ormat" })
+set("n", "<leader>cd", require("telescope.builtin").diagnostics, { desc = "code [d]iagnostics" })
+
+-- split navigation
+set("n", "<c-j>", "<c-w><c-j>")
+set("n", "<c-k>", "<c-w><c-k>")
+set("n", "<c-l>", "<c-w><c-l>")
+set("n", "<c-h>", "<c-w><c-h>")
