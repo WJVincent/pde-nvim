@@ -118,10 +118,10 @@ end
 
 -- register command group labels
 local wk = require("which-key")
-wk.register({
-	["<leader>f"] = { name = "+file" },
-	["<leader>s"] = { name = "+search" },
-	["<leader>c"] = { name = "+code" },
+wk.add({
+	{ "<leader>f", group = "+file" },
+	{ "<leader>s", group = "+search" },
+	{ "<leader>c", group = "+code" },
 })
 
 -- misc
